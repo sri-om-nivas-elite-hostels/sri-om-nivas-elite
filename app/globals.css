@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #faf6ee;
+  --color-ivory-deep: #f2ebdd;
+  --color-ink: #1d2621;
+  --color-muted: #55615a;
+  --color-line: #e3dccd;
+
+  --color-forest-50: #eef4f0;
+  --color-forest-100: #dce8e0;
+  --color-forest-600: #2a6249;
+  --color-forest-700: #1f4d3a;
+  --color-forest-800: #183d2e;
+
+  --color-terracotta-50: #fbf0ea;
+  --color-terracotta-100: #f4ddd1;
+  --color-terracotta-500: #b8673f;
+  --color-terracotta-700: #8a4a2f;
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), var(--font-body), ui-sans-serif, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-terracotta-500);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Leave room for the fixed mobile contact bar. */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Scroll-driven entrance animation (no JavaScript; content is visible by default). */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--reveal-offset, 0px)) entry calc(60% + var(--reveal-offset, 0px));
+    }
+  }
+
+  .hero-in {
+    animation: reveal-up 0.6s ease-out both;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
